@@ -63,5 +63,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ## User for example database
 
 user: dev@dev.com.br
-password: 12345
+password: 123456
 
