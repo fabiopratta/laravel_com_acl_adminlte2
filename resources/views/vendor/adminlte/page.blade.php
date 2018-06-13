@@ -7,12 +7,22 @@
             <div class="sidebar-collapse">
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header">
-                        <div class="dropdown profile-element"> <span>
-                            <!--<img alt="image" class="img-circle" src="URLPHOTO" width="80px" /> -->
-                             </span>
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}}</strong>
-                             </span> <span class="text-muted text-xs block"><b class="caret"></b></span> </span> </a>
+                        <div class="dropdown profile-element">
+                        <span>
+                            @php
+                                $email = Auth::user()->email;
+                                $grav_url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=mm";
+                            @endphp
+                          <img alt="image" class="img-circle" src="{{$grav_url}}" height="48px"/>
+                        </span>
+                                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                          <span class="clear">
+                            <span class="block m-t-xs">
+                              <strong class="font-bold">{{{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}}</strong>
+                            </span>
+                            <span class="text-muted text-xs block">{{{ isset(Auth::user()->email) ? Auth::user()->email : "" }}}<b class="caret"></b></span>
+                          </span>
+                            </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <!-- <li><a href="profile.html">Profile</a></li>
                                  <li><a href="contacts.html">Contacts</a></li>
@@ -55,7 +65,16 @@
                     <div class="navbar-header">
                         <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                     </div>
-                    <!-- nav bar right removed -->
+                    <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <form id="logout-form" action="{{ url('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                        <a href="" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            <i class="fa fa-sign-out"></i>Sair
+                        </a>
+                    </li>
+                    </ul>
                 </nav>
             </div>
             <!-- Content Wrapper. Contains page content -->
