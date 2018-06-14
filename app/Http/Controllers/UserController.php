@@ -43,9 +43,8 @@ class UserController extends Controller
     {
         $data = $this->repository->orderBy("id",'DESC')->get();
 
-        return view('users.index',compact('data'));
+        return view('user.index',compact('data'));
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -55,7 +54,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::pluck('name','name')->all();
-        return view('users.create',compact('roles'));
+        return view('user.create',compact('roles'));
     }
 
 
@@ -68,7 +67,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->service->store($request->all());
-        return redirect()->route('users.index')
+        return redirect()->route('user.index')
                         ->with('success','Usuario criado com sucesso');
     }
 
@@ -82,7 +81,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = $this->repository->find($id);
-        return view('users.show',compact('user'));
+        return view('user.show',compact('user'));
     }
 
 
@@ -99,7 +98,7 @@ class UserController extends Controller
         $userRole = $user->roles->pluck('name','name')->all();
 
 
-        return view('users.edit',compact('user','roles','userRole'));
+        return view('user.edit',compact('user','roles','userRole'));
     }
 
 
@@ -136,9 +135,12 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
 
 
-        return redirect()->route('users.index')
+        return redirect()->route('user.index')
                         ->with('success','Usuario editado com sucesso');
     }
+
+
+
 
 
     /**
@@ -150,7 +152,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
-        return redirect()->route('users.index')
+        return redirect()->route('user.index')
                         ->with('success','Usuario deletado com sucesso');
     }
 }

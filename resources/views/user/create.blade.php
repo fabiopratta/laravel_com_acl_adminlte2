@@ -8,7 +8,7 @@
         </div>
         <div class="col-sm-8">
             <div class="title-action">
-                <a class="btn btn-primary" href="{{ route('users.index') }}"> Voltar</a>
+                <a class="btn btn-primary" href="{{ route('user.index') }}"> Voltar</a>
             </div>
         </div>
     </div>
@@ -43,7 +43,7 @@
         <div class="animated fadeInRightBig">
             <div class="ibox-content">
 
-            {!! Form::open(array('route' => 'users.store','method'=>'POST')) !!}
+            {!! Form::open(array('route' => 'user.store','method'=>'POST')) !!}
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">

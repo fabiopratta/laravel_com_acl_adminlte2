@@ -8,7 +8,7 @@
         </div>
         <div class="col-sm-8">
             <div class="title-action">
-                <a class="btn btn-primary" href="{{ route('users.index') }}"> Voltar</a>
+                <a class="btn btn-primary" href="{{ route('user.index') }}"> Voltar</a>
             </div>
         </div>
     </div>
@@ -43,7 +43,7 @@
         <div class="animated fadeInRightBig">
             <div class="ibox-content">
 
-{!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
+{!! Form::model($user, ['method' => 'PATCH','route' => ['user.update', $user->id]]) !!}
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">

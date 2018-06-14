@@ -3,14 +3,16 @@
 @section('content')
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-sm-4">
-            <h2>Recursos</h2>
+            <h2>Editar Papel</h2>
         </div>
         <div class="col-sm-8">
             <div class="title-action">
-                <a class="btn btn-primary" href="{{ route('resources.index') }}"> Voltar</a>
+                <a class="btn btn-primary" href="{{ route('role.index') }}"> Voltar</a>
             </div>
         </div>
     </div>
+
+
 
     @if (count($errors) > 0)
         @if ($errors->any())
@@ -40,20 +42,19 @@
     <div class="wrapper wrapper-content">
         <div class="animated fadeInRightBig">
             <div class="ibox-content">
-
-        {!! Form::open(array('route' => 'resources.store','method'=>'POST')) !!}
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Recursos:</strong>
-                    {!! Form::select('resource', $resources, null, ['class' => 'form-control'] ) !!}
+                {!! Form::model($role, ['method' => 'PATCH','route' => ['role.update', $role->id]]) !!}
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Nome:</strong>
+                            {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                        <button type="submit" class="btn btn-primary">Editar</button>
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Salvar</button>
-            </div>
-        </div>
-        {!! Form::close() !!}
+                {!! Form::close() !!}
 
             </div>
         </div>

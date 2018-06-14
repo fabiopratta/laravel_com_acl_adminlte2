@@ -1,5 +1,47 @@
 <?php
 
+
+
+//Get All Modules for array
+$controllers = require_once base_path('vendor/composer/autoload_classmap.php');
+$controllers = array_keys($controllers);
+$controllers = array_filter($controllers, function ($controller) {
+	return strpos($controller, 'App\Http\Controllers') !== false;
+});
+$controllers = array_map(function ($controller) {
+	return str_replace('App\Http\Controllers\\', '', $controller);
+}, $controllers);
+
+$controllers = array_filter($controllers, function ($controller) {
+	return strpos($controller, '\\') == false;
+});
+
+$controllers = array_filter($controllers, function ($controller) {
+	return str_replace('Controller', '', $controller);
+});
+
+$resources = [];
+//defined icons ciustom
+$icons = ['role'=>'user','resource'=>'cubes','permission'=>'eye','user'=>'users'];
+
+foreach ($controllers as $controller)
+{
+	$resource = str_replace("Controller", '', $controller);
+
+
+	if(isset($icons[strtolower($resource)])){
+		$iconMenu = $icons[strtolower($resource)];
+	}else{
+		$iconMenu="";
+	}
+	$resources[strtolower($resource)]['text'] = $resource;
+	$resources[strtolower($resource)]['url'] = strtolower($resource);
+	$resources[strtolower($resource)]['icon'] = $iconMenu;
+	$resources[strtolower($resource)]['can'] = strtolower($resource)."-list";
+}
+
+rsort($resources);
+
 return [
 
     /*
@@ -107,7 +149,8 @@ return [
     |
     */
 
-    'menu' => [
+    'menu' => $resources,
+	/*[
         'ACL',
 	    [
 		    'text'    => 'Papeis',

@@ -3,10 +3,12 @@
 namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Passport\HasApiTokens;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+
 
 /**
  * Class User.
@@ -17,6 +19,7 @@ class User extends Authenticatable implements Transformable
 {
     use TransformableTrait;
 	use HasRoles;
+	use HasApiTokens;
 
     /**
      * The attributes that are mass assignable.

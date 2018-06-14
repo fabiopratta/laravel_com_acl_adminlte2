@@ -17,14 +17,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-//Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
 //
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::resource('users', 'UserController');
+Route::resource('user', 'UserController');
 
-Route::resource('roles', 'RoleController');
+Route::resource('role', 'RoleController');
 
-Route::resource('permissions', 'PermissionController');
+Route::resource('permission', 'PermissionController');
 
-Route::resource('resources', 'ResourceController');
+Route::resource('resource', 'ResourceController');
+
+Route::resource('clientes', 'ClientesController');

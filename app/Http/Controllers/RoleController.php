@@ -35,7 +35,7 @@ class RoleController extends Controller
     public function index(Request $request)
     {
         $roles = Role::orderBy('id','DESC')->paginate(5);
-        return view('roles.index',compact('roles'))
+        return view('role.index',compact('roles'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
@@ -48,7 +48,7 @@ class RoleController extends Controller
     public function create()
     {
         $permission = Permission::get();
-        return view('roles.create',compact('permission'));
+        return view('role.create',compact('permission'));
     }
 
 
@@ -69,7 +69,7 @@ class RoleController extends Controller
         //$role->syncPermissions($request->input('permission'));
 
 
-        return redirect()->route('roles.index')
+        return redirect()->route('role.index')
                         ->with('success','Papel criado com sucesso');
     }
     /**
@@ -86,7 +86,7 @@ class RoleController extends Controller
             ->get();
 
 
-        return view('roles.show',compact('role','rolePermissions'));
+        return view('role.show',compact('role','rolePermissions'));
     }
 
 
@@ -105,7 +105,7 @@ class RoleController extends Controller
             ->all();*/
 
 
-        return view('roles.edit',compact('role','permission','rolePermissions'));
+        return view('role.edit',compact('role','permission','rolePermissions'));
     }
 
 
@@ -131,7 +131,7 @@ class RoleController extends Controller
         //$role->syncPermissions($request->input('permission'));
 
 
-        return redirect()->route('roles.index')
+        return redirect()->route('role.index')
                         ->with('success','Papel editado com sucesso');
     }
     /**
@@ -143,7 +143,7 @@ class RoleController extends Controller
     public function destroy($id)
     {
         DB::table("roles")->where('id',$id)->delete();
-        return redirect()->route('roles.index')
+        return redirect()->route('role.index')
                         ->with('success','Papel deletado com sucesso');
     }
 }

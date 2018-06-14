@@ -68,7 +68,7 @@ class PermissionController extends Controller
 
 	    $permissionsShow = ['list'=>'Listar','create'=>"Criar",'edit'=>'Editar','delete'=>'Deletar'];
 
-        return view('permissions.index',compact('retorno','permissionsShow'));
+        return view('permission.index',compact('retorno','permissionsShow'));
     }
 
 
@@ -93,7 +93,7 @@ class PermissionController extends Controller
 
 	    $permissions = ['list'=>'Listar','create'=>"Criar",'edit'=>'Editar','delete'=>'Deletar'];
 
-        return view('permissions.create',compact('resources', 'roles', 'permissions'));
+        return view('permission.create',compact('resources', 'roles', 'permissions'));
     }
 
 
@@ -145,7 +145,7 @@ class PermissionController extends Controller
         $role->syncPermissions($arrPermissions);
 
 
-        return redirect()->route('permissions.index')
+        return redirect()->route('permission.index')
                         ->with('success','Permissao criada com sucesso');
     }
     /**
@@ -162,7 +162,7 @@ class PermissionController extends Controller
             ->get();
 
 
-        return view('roles.show',compact('role','rolePermissions'));
+        return view('role.show',compact('role','rolePermissions'));
     }
 
 
@@ -208,7 +208,7 @@ class PermissionController extends Controller
 
 	    app(PermissionRegistrar::class)->forgetCachedPermissions();
 
-        return view('permissions.edit',compact('role','roles','resources','permissions', 'arrPermissions'));
+        return view('permission.edit',compact('role','roles','resources','permissions', 'arrPermissions'));
     }
 
 
@@ -258,7 +258,7 @@ class PermissionController extends Controller
 
 	    app(PermissionRegistrar::class)->forgetCachedPermissions();
 
-	    return redirect()->route('permissions.index')
+	    return redirect()->route('permission.index')
 	                     ->with('success','Permissao criada com sucesso');
 
     }
@@ -291,7 +291,7 @@ class PermissionController extends Controller
 	    }
 
 	    app(PermissionRegistrar::class)->forgetCachedPermissions();
-        return redirect()->route('permissions.index')
+        return redirect()->route('permission.index')
                         ->with('success','Permissaoes deletadas sucesso');
     }
 }

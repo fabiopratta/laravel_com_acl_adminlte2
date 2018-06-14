@@ -8,7 +8,7 @@
         <div class="col-sm-8">
             <div class="title-action">
                 @can('user-create')
-                    <a class="btn btn-success" href="{{ route('users.create') }}"> Novo Usuario</a>
+                    <a class="btn btn-success" href="{{ route('user.create') }}"> Novo Usuario</a>
                 @endcan
             </div>
         </div>
@@ -57,13 +57,13 @@
                             </td>
                             <td>
                                 @can('user-edit')
-                                <a href="{{ route('users.edit',$user->id) }}" class="btn btn-warning">
+                                <a href="{{ route('user.edit',$user->id) }}" class="btn btn-warning">
                                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                 </a>
                                 @endcan
 
                                 @can('user-delete')
-                                {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
+                                {!! Form::open(['method' => 'DELETE','route' => ['user.destroy', $user->id],'style'=>'display:inline']) !!}
                                 <button type="submit" class="btn btn-danger">
                                     <span class="glyphicon glyphicon-remove"></span>
                                 </button>

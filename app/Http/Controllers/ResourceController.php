@@ -10,10 +10,13 @@ use Illuminate\Routing\Route;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use DB;
+use Spatie\Permission\Traits\RefreshesPermissionCache;
+use Spatie\Permission\PermissionRegistrar;
 
 
 class ResourceController extends Controller
 {
+	use RefreshesPermissionCache;
     /**
      * Display a listing of the resource.
      *
@@ -46,7 +49,7 @@ class ResourceController extends Controller
 		    }
 	    }
 
-        return view('resources.index',compact('resources'));
+        return view('resource.index',compact('resources'));
     }
 
 
@@ -58,25 +61,25 @@ class ResourceController extends Controller
     public function create(Request $request)
     {
 
-	    $controllers = require_once base_path('vendor/composer/autoload_classmap.php');
-	    $controllers = array_keys($controllers);
-	    $controllers = array_filter($controllers, function ($controller) {
+	    $controllersAutoLoad = include base_path('vendor/composer/autoload_classmap.php');
+	    $controllersAutoLoad = array_keys($controllersAutoLoad);
+	    $controllersAutoLoad = array_filter($controllersAutoLoad, function ($controller) {
 		    return strpos($controller, 'App\Http\Controllers') !== false;
 	    });
-	    $controllers = array_map(function ($controller) {
+	    $controllersAutoLoad = array_map(function ($controller) {
 		    return str_replace('App\Http\Controllers\\', '', $controller);
-	    }, $controllers);
+	    }, $controllersAutoLoad);
 
-	    $controllers = array_filter($controllers, function ($controller) {
+	    $controllersAutoLoad = array_filter($controllersAutoLoad, function ($controller) {
 		    return strpos($controller, '\\') == false;
 	    });
 
-	   $controllers = array_filter($controllers, function ($controller) {
+	    $controllersAutoLoad = array_filter($controllersAutoLoad, function ($controller) {
 		    return str_replace('Controller', '', $controller);
 	    });
 
 	   $resources = [];
-	   foreach ($controllers as $controller)
+	   foreach ($controllersAutoLoad as $controller)
 	   {
 	   	$resource = str_replace("Controller", '', $controller);
 	   	$resources[strtolower($resource)] = $resource;
@@ -94,7 +97,7 @@ class ResourceController extends Controller
 			}
 	   }
 
- 	   return view('resources.create',compact('resources'));
+ 	   return view('resource.create',compact('resources'));
     }
 
 
@@ -122,7 +125,9 @@ class ResourceController extends Controller
         	Permission::create($insertPermission);
         }
 
-        return redirect()->route('resources.index')
+	    app(PermissionRegistrar::class)->forgetCachedPermissions();
+
+        return redirect()->route('resource.index')
                         ->with('success','Recurso criado com sucesso');
     }
 
@@ -135,7 +140,9 @@ class ResourceController extends Controller
     public function destroy($resource)
     {
         DB::table("permissions")->where('name',$resource)->orWhere('name', 'like', '%' . $resource . '%')->delete();
-        return redirect()->route('resources.index')
+
+	    app(PermissionRegistrar::class)->forgetCachedPermissions();
+        return redirect()->route('resource.index')
                         ->with('success','Recurso deletado com sucesso');
     }
 }

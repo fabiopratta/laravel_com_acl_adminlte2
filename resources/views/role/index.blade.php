@@ -8,7 +8,7 @@
         <div class="col-sm-8">
             <div class="title-action">
                 @can('permission-create')
-                    <a class="btn btn-success" href="{{ route('roles.create') }}"> Criar Papel</a>
+                    <a class="btn btn-success" href="{{ route('role.create') }}"> Criar Papel</a>
                 @endcan
             </div>
         </div>
@@ -47,12 +47,12 @@
                             <td>{{ $role->name }}</td>
                             <td>
                                 @can('role-edit')
-                                    <a href="{{ route('roles.edit',$role->id) }}" class="btn btn-warning">
+                                    <a href="{{ route('role.edit',$role->id) }}" class="btn btn-warning">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                     </a>
                                 @endcan
                                 @can('role-delete')
-                                    {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
+                                    {!! Form::open(['method' => 'DELETE','route' => ['role.destroy', $role->id],'style'=>'display:inline']) !!}
                                         <button type="submit" class="btn btn-danger">
                                             <span class="glyphicon glyphicon-remove"></span>
                                         </button>
