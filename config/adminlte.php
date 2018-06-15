@@ -3,7 +3,7 @@
 
 
 //Get All Modules for array
-$controllers = require_once base_path('vendor/composer/autoload_classmap.php');
+$controllers = include base_path('vendor/composer/autoload_classmap.php');
 $controllers = array_keys($controllers);
 $controllers = array_filter($controllers, function ($controller) {
 	return strpos($controller, 'App\Http\Controllers') !== false;
@@ -22,7 +22,13 @@ $controllers = array_filter($controllers, function ($controller) {
 
 $resources = [];
 //defined icons ciustom
-$icons = ['role'=>'user','resource'=>'cubes','permission'=>'eye','user'=>'users'];
+$icons = [
+	'role'=>'user',
+	'resource'=>'cubes',
+	'permission'=>'eye',
+	'user'=>'users',
+	'clientes' => 'institution'
+	];
 
 foreach ($controllers as $controller)
 {

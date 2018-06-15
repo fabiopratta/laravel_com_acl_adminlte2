@@ -62,6 +62,8 @@
 <script src="{{ asset('js/plugins/toastr/toastr.min.js') }}"></script>
 <script src="{{ asset('js/plugins/dataTables/datatables.min.js') }}"></script>
 <script src="{{ asset('js/plugins/iCheck/icheck.min.js') }}"></script>
+<script src="{{ asset('js/plugins/jquery-maskedinput/jquery.mask.js')}}"></script>
 <script src="{{ asset('js/inspinia.js') }}"></script>
+<script src="{{ asset('js/custom.js') }}"></script>
 </body>
 </html>

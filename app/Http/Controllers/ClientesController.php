@@ -67,6 +67,15 @@ class ClientesController extends Controller
         return view('clientes.index', compact('clientes'));
     }
 
+	/**
+	 * create new client
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+    public function create()
+    {
+	    return view('clientes.create', compact(''));
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -94,7 +103,8 @@ class ClientesController extends Controller
                 return response()->json($response);
             }
 
-            return redirect()->back()->with('message', $response['message']);
+            //return redirect()->back()->with('message', $response['message']);
+	        return redirect()->route('clientes.index')->with('success','Cliente criado com sucesso');
         } catch (ValidatorException $e) {
             if ($request->wantsJson()) {
                 return response()->json([
@@ -102,8 +112,8 @@ class ClientesController extends Controller
                     'message' => $e->getMessageBag()
                 ]);
             }
-
-            return redirect()->back()->withErrors($e->getMessageBag())->withInput();
+	        return redirect()->route('clientes.index')->with('error',$e->getMessageBag());
+            //return redirect()->back()->withErrors($e->getMessageBag())->withInput();
         }
     }
 

@@ -35,28 +35,32 @@
                     <table class="table table-striped table-bordered table-hover dataTables">
                         <thead>
                         <tr>
-                            <th>Papel</th>
-                            <th>Recurso</th>
-                            <th>Permissao</th>
-                            <th width="280px">Acao</th>
+                            <th>Nome</th>
+                            <th>CNPJ</th>
+                            <th>Email</th>
+                            <th>Endereco</th>
+                            <th>Cidade</th>
+                            <th>Estado</th>
+                            <th>Acao</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach ($clientes as $key => $cliente)
                             <tr>
                                 <td>{{$cliente->nome}}</td>
-                                <td></td>
+                                <td>{{$cliente->cnpj}}</td>
+                                <td>{{$cliente->email}}</td>
+                                <td>{{$cliente->endereco}}</td>
+                                <td>{{$cliente->cidade}}</td>
+                                <td>{{$cliente->estado}}</td>
                                 <td>
-
-                                </td>
-                                <td>
-                                    @can('permission-edit')
-                                        <a href="{{ route('permissions.edit',$permission['role']->id."-".$resource) }}" class="btn btn-warning">
+                                    @can('clientes-edit')
+                                        <a href="{{ route('clientes.edit',$cliente->id) }}" class="btn btn-warning">
                                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                         </a>
                                     @endcan
-                                    @can('permission-delete')
-                                        {!! Form::open(['method' => 'DELETE','route' => ['permissions.destroy', $permission['role']->id."-".$resource],'style'=>'display:inline']) !!}
+                                    @can('clientes-delete')
+                                        {!! Form::open(['method' => 'DELETE','route' => ['clientes.destroy', $cliente->id],'style'=>'display:inline']) !!}
                                             <button type="submit" class="btn btn-danger">
                                                 <span class="glyphicon glyphicon-remove"></span>
                                             </button>
